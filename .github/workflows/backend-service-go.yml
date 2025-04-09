@@ -25,7 +25,7 @@ jobs:
         working-directory: backend-service-go
 
     steps:
-      - name: Check out code
+      - name: Check Out the Code
         uses: actions/checkout@v2
 
       - name: Install kubectl
