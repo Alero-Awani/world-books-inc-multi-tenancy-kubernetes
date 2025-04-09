@@ -1,8 +1,6 @@
 name: CI/CD.
 on:
-  push:
-    branches:
-      - deploy
+  push
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
