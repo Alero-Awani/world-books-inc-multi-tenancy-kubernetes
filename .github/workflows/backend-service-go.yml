@@ -41,14 +41,13 @@ jobs:
           curl -LO https://get.helm.sh/helm-v3.12.3-linux-amd64.tar.gz
           tar xfz helm-v3.12.3-linux-amd64.tar.gz
           sudo mv linux-amd64/helm /usr/local/bin/
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.GIT_ACTIONS_AWS_ACTION_ROLE_ARN }}
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHub_Actions_Role
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Sts GetCallerIdentity
+      - name: Fetch the Caller Identity
         run: |
           aws sts get-caller-identity
       - name: Login to Amazon ECR
