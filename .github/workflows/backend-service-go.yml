@@ -1,6 +1,6 @@
 name: Deploy Golang Backend Service
 on: 
-  workflow_dispatch:
+  push:
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
