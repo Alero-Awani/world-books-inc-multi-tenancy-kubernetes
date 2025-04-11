@@ -65,7 +65,7 @@ jobs:
           # fail_on_empty: true
           file_name: .env
 
-      - name: Build, Tag, and Push the Image to Amazon ECR
+      - name: Build, Tag, and Push Image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
