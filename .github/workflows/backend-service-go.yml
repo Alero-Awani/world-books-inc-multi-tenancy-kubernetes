@@ -32,7 +32,7 @@ jobs:
         uses: azure/setup-kubectl@v4
         id: install
 
-      - name: Install the eksctl
+      - name: Install eksctl
         run: |
           curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
           sudo mv /tmp/eksctl /usr/local/bin
@@ -65,11 +65,11 @@ jobs:
           # fail_on_empty: true
           file_name: .env
 
-      - name: Build, Tag, and Push Image to Amazon ECR
+      - name: Build, Tag, and Push the Image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:latest ../backend-service-go
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           
