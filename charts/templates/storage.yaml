@@ -19,3 +19,5 @@ metadata:
   name: cloud-ssd
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
