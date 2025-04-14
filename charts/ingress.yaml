@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "helm-chart.appName" . }}-ingress
+spec:
+  defaultBackend:
+    service:
+      name: {{ include "helm-chart.appName" . }}-service
+      port:
+        number: 80

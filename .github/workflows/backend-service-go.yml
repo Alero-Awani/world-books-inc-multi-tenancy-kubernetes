@@ -70,4 +70,11 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:latest ../backend-service-go
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME
 
-          
+      - name: Deploy to EKS using Helm
+        run: |
+          helm upgrade --install $IMAGE_NAME ../charts \
+            --set appName=world-books-inc \
+            --set deployment.image.repository=$ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME \
+            --set deployment.image.tag=$IMAGE_TAG \
+            --namespace default \
+ 

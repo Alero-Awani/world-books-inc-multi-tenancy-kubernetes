@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-chart.appName" . }}-deployment
+  labels:
+    app: {{ include "helm-chart.appName" . }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "helm-chart.appName" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "helm-chart.appName" . }}
+    spec:
+      containers:
+      - name: {{ include "helm-chart.appName" . }}
+        image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: {{ .Values.deployment.containers.resources.requests.memory }}
+            cpu: {{ .Values.deployment.containers.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.deployment.containers.resources.limits.memory }}
+            cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
