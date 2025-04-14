@@ -73,7 +73,7 @@ jobs:
         run: |
           aws eks update-kubeconfig --region $AWS_REGION --name ${{ secrets.EKS_CLUSTER_NAME }}
 
-      - name: Deploy to EKS using Helms
+      - name: Deploy to EKS using Helm
         run: |
           helm upgrade --install $IMAGE_NAME ../charts \
             --set appName=world-books-inc \
