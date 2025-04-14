@@ -9,6 +9,7 @@ RUN go build -o main cmd/main.go
 FROM alpine:3.16
 WORKDIR /app
 COPY --from=builder /app/main .
+COPY .env .env 
 
 # Set the command to run when the container starts
 CMD ["/app/main"]
