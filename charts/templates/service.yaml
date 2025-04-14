@@ -11,3 +11,21 @@ spec:
       targetPort: 8080
 
   type: ClusterIP
+
+
+# DATABASE
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dynamodb
+  name: {{ include "helm-chart.appName" . }}-dynamodb-service
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: dynamodb
+  
+  type: ClusterIP

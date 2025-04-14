@@ -27,3 +27,34 @@ spec:
           limits:
             memory: {{ .Values.deployment.containers.resources.limits.memory }}
             cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
+
+# DATABASE
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dynamodb
+  name: {{ include "helm-chart.appName" . }}-dynamodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dynamodb
+  template:
+    metadata:
+      labels:
+        app: dynamodb
+    spec:
+      containers:
+      - image: amazon/dynamodb-local
+        name: dynamodb-local
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: {{ include "helm-chart.appName" . }}-dynamodb-persistent-storage
+          mountPath: /var/lib/dynamodb
+      volumes:
+        - name: {{ include "helm-chart.appName" . }}-dynamodb-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ include "helm-chart.appName" . }}-pvc
