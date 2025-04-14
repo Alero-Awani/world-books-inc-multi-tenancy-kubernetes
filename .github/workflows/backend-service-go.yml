@@ -61,8 +61,7 @@ jobs:
           envkey_SERVER_PORT: ${{ secrets.SERVER_PORT }}
           envkey_CONTEXT_TIMEOUT: ${{ secrets.CONTEXT_TIMEOUT }}
           envkey_BACKEND_SERVICE_URL: ${{ secrets.BACKEND_SERVICE_URL }}
-
-          # fail_on_empty: true
+          fail_on_empty: true
           file_name: .env
 
       - name: Build, Tag, and Push the Image to AWS ECR
