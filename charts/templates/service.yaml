@@ -12,7 +12,7 @@ spec:
 
   type: ClusterIP
 
-
+---
 # DATABASE
 
 apiVersion: v1

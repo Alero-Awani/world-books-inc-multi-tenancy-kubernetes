@@ -28,6 +28,8 @@ spec:
             memory: {{ .Values.deployment.containers.resources.limits.memory }}
             cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
 
+---
+
 # DATABASE
 
 apiVersion: apps/v1
