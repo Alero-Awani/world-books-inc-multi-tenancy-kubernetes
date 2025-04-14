@@ -1,0 +1,6 @@
+apiVersion: v2
+name: backend-service-go
+description: A Helm chart for deploying the World Books Inc Golang backend service to EKS
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
