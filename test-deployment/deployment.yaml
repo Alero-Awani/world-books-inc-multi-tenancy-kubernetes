@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ebs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-ebs
+  template:
+    metadata:
+      labels:
+        app: nginx-ebs
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: ebs-volume
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: ebs-volume
+          persistentVolumeClaim:
+            claimName: ebs-claim
