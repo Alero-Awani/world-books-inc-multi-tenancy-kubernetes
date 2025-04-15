@@ -64,7 +64,7 @@ jobs:
           fail_on_empty: true
           file_name: .env
           directory: backend-service-go
-      - name: Build, Tag, and Push the Image to AWS ECR REPO
+      - name: Build, Tag, and Push the Image to AWS ECR REPOS
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME:latest ../backend-service-go
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$IMAGE_NAME
@@ -73,7 +73,7 @@ jobs:
         run: |
           aws eks update-kubeconfig --region $AWS_REGION --name ${{ secrets.EKS_CLUSTER_NAME }}
 
-      - name: Deploy to EKS using Helm
+      - name: Deploy to EKS using Helm Chart
         run: |
           helm upgrade --install $IMAGE_NAME ../charts \
             --set appName=world-books-inc \

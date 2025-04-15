@@ -4,9 +4,18 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "helm-chart.appName" . }}-pvc
 spec:
-  storageClassName: gp2
+  storageClassName: cloud-ssd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 8Gi
+      
+---
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cloud-ssd
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
